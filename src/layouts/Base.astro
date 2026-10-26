@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import { site } from '../lib/site';
+interface Props { title: string; description?: string }
+const { title, description = '筋トレ入力を、サクッとスワイプ。重量と回数を入力してセット完了。記録グラフや友だちとの共有も、自分のペースで。' } = Astro.props;
+const canonical = site.origin ? new URL(Astro.url.pathname, site.origin).href : undefined;
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#167347" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={site.indexable ? 'index, follow' : 'noindex, nofollow'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="FitSwipe" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {site.origin && <>
+      <meta property="og:image" content={`${site.origin}/social.png`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="FitSwipe — 筋トレ入力を、サクッとスワイプ。" />
+    </>}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へスキップ</a>
+    <slot />
+  </body>
+</html>

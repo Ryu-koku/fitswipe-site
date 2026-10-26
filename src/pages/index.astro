@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Brand from '../components/Brand.astro';
+import Footer from '../components/Footer.astro';
+import FeatureArt from '../components/FeatureArt.astro';
+import StoreLinks from '../components/StoreLinks.astro';
+
+const features = [
+  { type: 'swipe' as const, number: '01', label: 'SWIPE', name: 'スワイプで記録', title: ['入力したら、', 'スワイプで次へ。'], body: '重量と回数を入力したら、右か上へスワイプしてセット完了。休憩もタイマーで確認しながら、いつものトレーニングを記録しよう。', note: '左か下へのスワイプはスキップ。重量や回数の自動入力ではありません。' },
+  { type: 'graph' as const, number: '02', label: 'LOOK BACK', name: '成果グラフ', title: ['積み重ねが、', 'グラフに。'], body: '選んだメニューごとに、記録した重量の変化をチェック。今日までの記録を振り返って、次のトレーニングのきっかけに。', note: '完了セットに記録した重量の合計です。回数は含まず、筋力や体型の変化を保証するものではありません。' },
+  { type: 'friends' as const, number: '03', label: 'WITH FRIENDS', name: '友達共有', title: ['友だちの記録も、', '次の刺激に。'], body: '選んだ記録だけ、ルームに招待した友だちにシェア。仲間の記録を見て、自分のペースで次の目標を立てよう。', note: '共有は任意。自動ランキング・対戦・勝敗判定の機能ではありません。' },
+];
+const faqs = [
+  { q: 'スワイプだけで記録できる？', a: '重量と回数は入力します。そのあと右か上へスワイプすると、セットを完了できます。左か下へのスワイプはスキップです。' },
+  { q: '一人でも使える？', a: 'はい。トレーニング記録は端末内に保存でき、友だちとの共有は必須ではありません。共有したい記録だけを選んで投稿します。' },
+  { q: 'グラフは何を表しているの？', a: '選んだメニューの完了セットに記録した重量の合計です。回数は合計に含みません。記録の推移を振り返るためのグラフで、筋力や体型の改善を保証するものではありません。' },
+  { q: '友だちとどう競えるの？', a: '招待した仲間と記録を見せ合い、次の目標を立てる使い方です。自動ランキング・対戦・勝敗判定はありません。無理な重量や回数ではなく、それぞれのペースを大切にしてください。' },
+  { q: '友達共有はすぐに使える？', a: '共有には、アプリを配布する側で共有サーバーの接続先設定が必要です。未設定の場合は「準備中」と表示されます。一般向け配布版での設定と動作は確認中です。' },
+  { q: 'どこからダウンロードできる？', a: 'ページ末尾にiOS向けのApp Store、Android向けのGoogle Playの配布案内を用意しています。「配布情報を確認中」の場合は、まだリンクを利用できません。' },
+];
+---
+<Base title="FitSwipe｜筋トレ入力を、サクッとスワイプ。">
+  <header class="site-header"><div class="shell header-inner"><Brand /><nav aria-label="メインメニュー"><a href="#features">3つの特徴</a><a href="#faq">よくある質問</a><a class="nav-app" href="#download">アプリの配布案内 <span aria-hidden="true">↗</span></a></nav></div></header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-blob hero-blob--left" aria-hidden="true"></div><div class="hero-blob hero-blob--right" aria-hidden="true"></div>
+      <div class="shell hero-content"><span class="eyebrow"><span aria-hidden="true">✳</span> 筋トレの記録を、もっと気軽に。</span>
+        <h1 id="hero-title">筋トレ入力を、<br /><span>サクッとスワイプ。</span></h1>
+        <p class="hero-description">重量と回数を入力したら、スワイプでセット完了。<br class="desktop-break" />記録も休憩も、自分のペースで進めよう。</p>
+        <a class="button" href="#features">3つの特徴を見る <span aria-hidden="true">↓</span></a>
+        <div class="hero-illustration" aria-label="入力してからスワイプでセット完了する操作説明図">
+          <span class="hero-spark" aria-hidden="true">✳</span><div class="hero-mini hero-mini--left"><span>01</span><strong>重量・回数を入力</strong><span class="mini-lines" aria-hidden="true"></span></div>
+          <span class="hero-connect" aria-hidden="true">→</span><div class="hero-mini hero-mini--right"><span>02</span><strong>スワイプで完了 <span aria-hidden="true">↗</span></strong><span class="mini-done"><span aria-hidden="true">✓</span> 次のセットへ！</span></div>
+        </div><p class="hero-caption">使い方を表すイラストです。実際のアプリ画面ではありません。</p>
+      </div>
+    </section>
+    <section class="features shell" id="features" aria-labelledby="features-title"><div class="section-intro"><span class="section-kicker">WHAT YOU CAN DO</span><h2 id="features-title">記録する。振り返る。<br class="mobile-break" />ちょっとシェアする。</h2><p>いつもの筋トレに、3つの使い方。</p></div>
+      <div class="feature-stack">{features.map((f) => <article class:list={['feature', `feature--${f.type}`]} aria-labelledby={`feature-${f.type}`}><div class="feature-copy"><div class="feature-label"><span class="feature-number">{f.number}</span><span>{f.label}<small>{f.name}</small></span></div><h3 id={`feature-${f.type}`}>{f.title[0]}<br />{f.title[1]}</h3><p>{f.body}</p><p class="feature-note">{f.note}</p></div><FeatureArt type={f.type} /></article>)}</div>
+    </section>
+    <section class="little-things" aria-label="記録を支える機能"><div class="shell little-grid"><div><span class="little-icon" aria-hidden="true">▦</span><h2>トレーニングした日を、<br />一目で。</h2><p>カレンダーから、これまでの記録を振り返れます。</p></div><div><span class="little-icon" aria-hidden="true">⌂</span><h2>記録は、まず<br />自分の端末に。</h2><p>日々の記録は端末内に保存。仲間への共有は選んだ記録だけ。</p></div></div></section>
+    <section class="faq-section shell" id="faq" aria-labelledby="faq-title"><div class="section-intro"><span class="section-kicker">GOOD TO KNOW</span><h2 id="faq-title">よくある質問</h2><p>気になること、ここでチェック。</p></div><div class="faq-list">{faqs.map(({ q, a }) => <details class="faq"><summary><span class="faq-q" aria-hidden="true">Q.</span><span>{q}</span><span class="faq-toggle" aria-hidden="true"></span></summary><p>{a}</p></details>)}</div></section>
+    <section class="download" id="download" aria-labelledby="download-title"><div class="download-shape" aria-hidden="true">✳</div><div class="shell download-inner"><span class="section-kicker">YOUR NEXT SET</span><h2 id="download-title">次の筋トレも、<br />サクッと記録しよう。</h2><p>FitSwipeの配布情報はこちら。</p><StoreLinks /></div></section>
+  </main><Footer />
+  <script src="../scripts/scroll-reveal.ts"></script>
+</Base>

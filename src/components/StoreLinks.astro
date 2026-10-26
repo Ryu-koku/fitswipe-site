@@ -1,0 +1,21 @@
+---
+import { site } from '../lib/site';
+const stores = [
+  { label: 'App Store', platform: 'iPhone / iOS', url: site.apple, kind: 'apple' },
+  { label: 'Google Play', platform: 'Android', url: site.google, kind: 'google' },
+];
+---
+<div class="store-links" aria-label="アプリの配布先">
+  {stores.map(({ label, platform, url, kind }) => {
+    const Tag = url ? 'a' : 'div';
+    return (
+      <Tag class:list={['store-link', { 'store-link--pending': !url }]} href={url} aria-disabled={!url ? 'true' : undefined} data-store={kind}>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          {kind === 'apple' ? <><rect x="6" y="2" width="16" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M11 6h6M12 22h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></> : <><path d="M5 3v22l19-11L5 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m5 3 12 16M5 25l12-16" stroke="currentColor" stroke-width="1.5"/></>}
+        </svg>
+        <span><small>{platform}</small><strong>{label}</strong><small>{url ? '配布ページを開く ↗' : '配布情報を確認中'}</small></span>
+      </Tag>
+    );
+  })}
+</div>
+{(!site.apple || !site.google) && <p class="store-note">配布情報を確認できたストアからご案内します。<br />「確認中」の案内からは、まだダウンロードできません。</p>}
