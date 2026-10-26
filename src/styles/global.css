@@ -70,6 +70,10 @@ svg { display: block; max-width: 100%; }
 .feature--swipe { background: #edf7e4; }
 .feature--graph { background: #f7f7ea; }
 .feature--friends { background: #e8f4e9; }
+@media (min-width: 681px) {
+  .feature--graph .feature-art { grid-column: 1; grid-row: 1; }
+  .feature--graph .feature-copy { grid-column: 2; grid-row: 1; }
+}
 .feature-copy { max-width: 430px; }
 .feature-label { display: flex; align-items: center; gap: 12px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .08em; line-height: 1.4; }
 .feature-label small { display: block; letter-spacing: 0; font-size: 11px; font-weight: 600; margin-top: 3px; }
